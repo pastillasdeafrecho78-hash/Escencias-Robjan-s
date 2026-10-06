@@ -32,7 +32,7 @@ export function ProductoDetalle({ producto, otros }: { producto: Producto; otros
           {producto.imagen ? (
             <Image
               src={producto.imagen}
-              alt={`Frasco de ${producto.nombre}`}
+              alt={`Imagen de referencia de la fragancia que inspira ${producto.nombre}`}
               width={640}
               height={800}
               priority
@@ -41,6 +41,7 @@ export function ProductoDetalle({ producto, otros }: { producto: Producto; otros
           ) : (
             <p className="titulo self-center text-3xl text-muted italic">Sin foto en el catálogo</p>
           )}
+          <p className="detalle-imagen-aviso">Imagen de inspiración · La presentación de Robjan&apos;s puede variar</p>
         </div>
 
         <div className="px-5 py-12 sm:px-10 lg:px-14 lg:py-20">
@@ -55,7 +56,7 @@ export function ProductoDetalle({ producto, otros }: { producto: Producto; otros
           </nav>
           <h1 className="titulo mt-6 text-[clamp(3rem,6.5vw,5.5rem)]">{producto.nombre}</h1>
           <p className="titulo mt-3 text-2xl text-bone-dim italic">
-            {producto.marca ? `inspirada en ${producto.marca}` : "creación de la casa"}
+            {producto.marca ? `inspirada en ${producto.marca}` : "de Esencias Robjan's"}
           </p>
           <p className="etiqueta mt-6 text-bone-dim">{producto.familia}</p>
           {producto.notas.length > 0 && (

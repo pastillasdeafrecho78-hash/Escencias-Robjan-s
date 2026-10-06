@@ -10,7 +10,7 @@ export default function ContactoPage() {
   const centro = sucursales.find((sucursal) => sucursal.mapa);
 
   return (
-    <div className="grid lg:min-h-[70vh] lg:grid-cols-[0.8fr_1.2fr]">
+    <div className="page-stage grid lg:min-h-[70vh] lg:grid-cols-[0.8fr_1.2fr]">
       <div className="px-5 py-12 lg:px-12">
         <p className="etiqueta">Dolores Hidalgo</p>
         <h1 className="titulo mt-3 text-6xl sm:text-7xl">Sucursales</h1>
@@ -21,7 +21,7 @@ export default function ContactoPage() {
 
         <ul className="mt-8 grid gap-4">
           {sucursales.map((sucursal) => (
-            <li key={sucursal.id} className="rounded-2xl border border-line p-5">
+            <li key={sucursal.id} className="checkout-summary p-5">
               <p className="etiqueta">{sucursal.nombre}</p>
               <p className="titulo mt-2 text-3xl">{sucursal.direccion}</p>
               <p className="mt-1 text-sm text-muted">Dolores Hidalgo, Gto.</p>

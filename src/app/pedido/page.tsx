@@ -122,11 +122,13 @@ export default function PedidoPage() {
   }
 
   return (
-    <div className="mx-auto grid max-w-5xl gap-12 px-5 py-12 lg:grid-cols-[1.1fr_0.9fr]">
+    <div className="page-stage mx-auto grid max-w-5xl gap-12 px-5 py-12 lg:grid-cols-[1.1fr_0.9fr]">
       <div>
+        <p className="etiqueta">Tu selección · Datos de entrega</p>
         <h1 className="titulo text-6xl sm:text-7xl">Apartar pedido</h1>
         <p className="mt-3 max-w-md text-sm leading-6 text-muted">
-          Dejas tus datos y pasas al pago de prueba. No se hace un cargo real: la tarjeta que acepta esta pantalla es la de prueba de Stripe.
+          Deja tus datos y después simula un pago con la tarjeta de prueba indicada. No se hará ningún cargo real.
+          Para coordinar tu compra, envía el folio a la tienda por WhatsApp.
         </p>
         <form onSubmit={enviar} className="mt-8 space-y-6" noValidate>
           <div>
@@ -242,7 +244,7 @@ export default function PedidoPage() {
           </button>
         </form>
       </div>
-      <aside className="h-fit rounded-3xl border border-line p-6">
+      <aside className="checkout-summary h-fit p-6">
         <h2 className="text-lg">Resumen</h2>
         <ul className="mt-4 space-y-3 text-sm">
           {items.map((item) => (

@@ -75,12 +75,12 @@ export default function PagoPruebaPage() {
   }
 
   return (
-    <div className="mx-auto grid max-w-5xl gap-12 px-5 py-12 lg:grid-cols-[1.1fr_0.9fr]">
+    <div className="page-stage mx-auto grid max-w-5xl gap-12 px-5 py-12 lg:grid-cols-[1.1fr_0.9fr]">
       <div>
         <p className="etiqueta">Modo prueba</p>
-        <h1 className="titulo mt-2 text-6xl sm:text-7xl">Pagar {pedido.folio}</h1>
+        <h1 className="titulo mt-2 text-6xl sm:text-7xl">Simular pago</h1>
         <p className="mt-3 max-w-xl text-sm leading-6 text-muted">
-          Este cobro no sale de aquí ni llega a un banco. Para simular un pago aprobado usa la tarjeta de prueba de Stripe{" "}
+          Este formulario no procesa pagos reales. Para simular un pago aprobado usa la tarjeta de prueba{" "}
           <span className="text-bone">4242 4242 4242 4242</span>, cualquier vencimiento futuro y un CVC de tres dígitos.
         </p>
         <form onSubmit={pagar} className="mt-8 space-y-6" autoComplete="off">
@@ -137,11 +137,11 @@ export default function PagoPruebaPage() {
             </p>
           )}
           <button type="submit" disabled={enviando} className="btn disabled:opacity-60">
-            {enviando ? "Comprobando…" : `Pagar ${money(pedido.total)} en prueba`}
+            {enviando ? "Comprobando…" : `Simular ${money(pedido.total)}`}
           </button>
         </form>
       </div>
-      <aside className="h-fit rounded-3xl border border-line p-6">
+      <aside className="checkout-summary h-fit p-6">
         <h2 className="text-lg">{pedido.nombre}</h2>
         <ul className="mt-4 space-y-2 text-sm">
           {pedido.items.map((item) => (

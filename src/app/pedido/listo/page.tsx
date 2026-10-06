@@ -43,14 +43,14 @@ export default function PedidoListoPage() {
   const texto = mensajePedido(pedido);
 
   return (
-    <div className="mx-auto max-w-2xl px-5 py-14">
+    <div className="page-stage mx-auto max-w-2xl px-5 py-14">
       <p className="etiqueta">
         {pedido.pago === "prueba" ? "Pago de prueba aceptado" : "Pedido apartado"}
       </p>
       <h1 className="titulo cifra mt-2 text-6xl sm:text-7xl">{pedido.folio}</h1>
       <p className="mt-4 text-sm leading-6 text-muted">
         {pedido.pago === "prueba"
-          ? `${pedido.nombre}, el cobro de prueba pasó. No se hizo un cargo real. Mándale el folio a la tienda para que separe ${pedido.entrega === "envio" ? "el envío." : `tu pedido: ${textoEntrega(pedido.entrega).toLowerCase()}.`}`
+          ? `${pedido.nombre}, la simulación terminó sin cargo real. Mándale el folio a la tienda para coordinar ${pedido.entrega === "envio" ? "el envío." : `tu pedido: ${textoEntrega(pedido.entrega).toLowerCase()}.`}`
           : `${pedido.nombre}, este pedido todavía no tiene pago de prueba.`}
       </p>
       {pedido.pago !== "prueba" && (

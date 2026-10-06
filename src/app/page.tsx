@@ -50,9 +50,9 @@ export default async function HomePage() {
           <div className="mx-auto max-w-6xl px-5 py-18 sm:py-24">
             <div className="flex flex-wrap items-end justify-between gap-6">
               <div>
-                <p className="etiqueta">En el mostrador</p>
-                <h2 id="titulo-vitrina" className="titulo mt-4 text-[clamp(2.75rem,6vw,5.5rem)]">De la <span className="text-gold italic">casa.</span></h2>
-                <p className="mt-4 max-w-md text-sm leading-6 text-muted">Tres puntos de partida para conocer las dos vitrinas.</p>
+                <p className="etiqueta">Selección Robjan&apos;s</p>
+                <h2 id="titulo-vitrina" className="titulo mt-4 text-[clamp(2.75rem,6vw,5.5rem)]">El aroma <span className="text-gold italic">que eliges.</span></h2>
+                <p className="mt-4 max-w-md text-sm leading-6 text-bone-dim">Tres inspiraciones para empezar a recorrer nuestras vitrinas.</p>
               </div>
               <Link href="/productos?categoria=Todas" className="btn btn-line">Ver el catálogo <span aria-hidden>→</span></Link>
             </div>
@@ -63,7 +63,7 @@ export default async function HomePage() {
                   href={`/productos/${producto.slug}`}
                   className={`vitrina-destacado grupo-vitrina fondo-${producto.categoria.toLowerCase()} ${indice === 0 ? "vitrina-principal" : ""}`}
                 >
-                  <span className="etiqueta relative z-10 text-bone-dim">{producto.categoria}</span>
+                  <span className="etiqueta relative z-10 text-bone-dim">{producto.categoria} · Inspirada en {producto.marca}</span>
                   <span className="vitrina-foto apoyo">
                     <Image src={producto.imagen} alt={`Frasco de ${producto.nombre}`} width={560} height={700} sizes={indice === 0 ? "(min-width: 768px) 50vw, 100vw" : "(min-width: 768px) 25vw, 100vw"} className="frasco h-full w-full object-contain" />
                   </span>
@@ -82,25 +82,32 @@ export default async function HomePage() {
       )}
       <section className="border-t border-line">
         <div className="mx-auto max-w-6xl px-5 py-20 sm:py-24">
-          <p className="etiqueta">Lo que hacemos</p>
-          <p className="titulo mt-5 max-w-4xl text-[clamp(2.25rem,5.2vw,4.5rem)]">
-            Todas nuestras fragancias son <span className="text-gold italic">inspiraciones</span> de perfumes de
-            diseñador.
-            <span className="text-bone-dim"> El mismo carácter, a precio de mostrador.</span>
-          </p>
-          <p className="mt-6 max-w-xl text-sm leading-6 text-muted">
-            En cada esencia te decimos en qué perfume está inspirada. No somos distribuidores ni estamos afiliados a
-            esas marcas; los nombres solo sirven para que reconozcas el aroma.
-          </p>
+          <div className="grid gap-8 lg:grid-cols-[1.4fr_0.6fr] lg:gap-16">
+            <div>
+              <p className="etiqueta">Nuestra forma de elegir</p>
+              <h2 className="titulo mt-5 max-w-4xl text-[clamp(2.5rem,5.2vw,5rem)]">
+                Una inspiración puede convertirse en <span className="text-gold italic">tu esencia.</span>
+              </h2>
+            </div>
+            <div className="flex flex-col justify-end border-l border-gold/40 pl-6">
+              <p className="text-base leading-7 text-bone-dim">
+                Explora por notas, descubre el perfume que inspira cada fragancia y elige el tamaño que va contigo.
+                También puedes venir a conocerlas en nuestras dos sucursales de Dolores Hidalgo.
+              </p>
+              <p className="mt-5 text-xs leading-5 text-muted">
+                Somos una perfumería independiente. Las marcas mencionadas identifican inspiraciones; no existe afiliación con ellas.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
       <section className="border-t border-line">
         <div className="mx-auto max-w-6xl px-5 pt-18 pb-14 sm:pt-24">
           <p className="etiqueta">Elige tu medida</p>
           <h2 className="titulo mt-4 text-[clamp(2.5rem,5vw,4.5rem)]">
-            Tres tamaños,
+            Tu esencia,
             <br />
-            <span className="text-bone-dim italic">un mismo mostrador.</span>
+            <span className="text-bone-dim italic">a tu medida.</span>
           </h2>
           <dl className="repisa-tamanos mt-12">
             {TAMANOS.map((tamano) => (

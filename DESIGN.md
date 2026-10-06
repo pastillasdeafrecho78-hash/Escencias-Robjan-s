@@ -96,13 +96,13 @@ Una vitrina de perfumería de noche, no una tienda en línea genérica. Se entra
 
 ## Imágenes
 
-- Solo se usan los frascos reales de la tienda, recortados sobre fondo transparente (`/catalogo/*.webp`). Nunca fotos oficiales de las marcas ni fotos de stock.
+- Las imágenes actuales de `/catalogo/*.webp` son referencias visuales de las fragancias inspiradoras. Se etiquetan como tales. Las fotos de los frascos y empaques Robjan's deben venir de la tienda y no se inventan.
 - El frasco siempre lleva sombra de apoyo; no flota.
 - Si un producto no tiene foto, se muestra "Sin foto" en serif cursiva, sin placeholder gris.
 
 ## Movimiento
 
-- La apertura dibuja el logo, lo llena de perfume, revela el nombre con una orilla suave y termina con un brillo. Solo pasa la primera visita.
+- La apertura dibuja el logo, lo llena de perfume, revela el nombre con una orilla suave y termina con un brillo. Las vitrinas permanecen visibles y disponibles durante la animación.
 - Se anima con `transform` y `opacity`. Si se cambia el fondo, se hace con capas que cambian de opacidad.
 - Todo se apaga con `prefers-reduced-motion`.
 
@@ -125,3 +125,10 @@ Una vitrina de perfumería de noche, no una tienda en línea genérica. Se entra
 - Etiquetas tipo "01 / Catálogo", insignias de "Nuevo" o "Beta".
 - Verbos de relleno ("eleva", "descubre la magia"), nombres inventados, números falsos.
 - Copiar el diseño de otra marca.
+
+## Ajustes de la portada
+
+- En móvil, el logo animado tiene una franja propia encima de las dos vitrinas; ningún texto debe cruzar el logo ni los nombres de categoría.
+- Las frases editoriales de la portada usan Instrument Serif para dar más carácter a los textos secundarios. Las etiquetas, controles y datos mantienen Inter Tight por legibilidad.
+- En escritorio, el logo se centra entre las vitrinas. La animación no retrasa la navegación y respeta `prefers-reduced-motion`.
+- Cuando lleguen fotos reales de Robjan's, reemplazar las referencias de la portada por esas fotografías, manteniendo la etiqueta de inspiración en el catálogo y las fichas.

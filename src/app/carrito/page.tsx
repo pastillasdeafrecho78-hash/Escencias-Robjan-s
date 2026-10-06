@@ -12,7 +12,8 @@ export default function CarritoPage() {
   const [aviso, setAviso] = useState<string | null>(null);
 
   return (
-    <div className="mx-auto max-w-4xl px-5 py-12">
+    <div className="page-stage mx-auto max-w-4xl px-5 py-12">
+      <p className="etiqueta">Tu selección</p>
       <h1 className="titulo text-6xl sm:text-7xl">Carrito</h1>
       <p className="mt-2 text-sm text-muted">Revisa tamaños y cantidades antes de armar el pedido.</p>
 
@@ -78,11 +79,12 @@ export default function CarritoPage() {
               </li>
             ))}
           </ul>
-          <aside className="h-fit rounded-3xl border border-line p-6">
+          <aside className="checkout-summary h-fit p-6">
             <p className="text-sm text-muted">Total a apartar</p>
             <p className="titulo cifra mt-1 text-6xl">{money(total)}</p>
             <p className="mt-3 text-sm leading-6 text-muted">
-              No se cobra en esta página. Confirmas el pedido y lo pagas al recogerlo, o cotizas el envío por WhatsApp.
+              Aquí preparas tu selección. El paso siguiente solo simula un pago: no se hace ningún cargo real.
+              Envía el folio por WhatsApp para coordinar la entrega y el pago con la tienda.
             </p>
             {aviso && (
               <p className="mt-3 text-sm text-alert" role="status">

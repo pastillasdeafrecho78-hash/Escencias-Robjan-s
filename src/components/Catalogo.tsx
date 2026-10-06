@@ -8,7 +8,7 @@ import { money } from "@/lib/money";
 import type { Ajustes } from "@compartido/catalogo";
 
 const ordenes = [
-  { id: "destacados", label: "De la casa primero" },
+  { id: "destacados", label: "Selección primero" },
   { id: "nombre", label: "Nombre" },
   { id: "precio-asc", label: "Precio menor" },
   { id: "precio-desc", label: "Precio mayor" },

@@ -9,33 +9,18 @@ import { guardarLado, leerLado, type Lado } from "@/lib/lado";
 import type { Producto } from "@/lib/catalog";
 import { tienda } from "@/lib/tienda";
 
-type Vitrina = { lado: Lado; frascos: Producto[]; total: number; linea: string };
+type Vitrina = { lado: Lado; frascos: Producto[]; total: number; linea: string; fotoMarca?: string };
 
-const TIEMPO_MARCA = 3300;
-const TIEMPO_SALIDA = 780;
+const TIEMPO_SALIDA = 360;
 
 export function Apertura({ vitrinas, total }: { vitrinas: Vitrina[]; total: number }) {
   const router = useRouter();
   const [guardado, setGuardado] = useState<Lado | null>(null);
-  const [listo, setListo] = useState(false);
-  const [conocido, setConocido] = useState(false);
   const [elegido, setElegido] = useState<Lado | null>(null);
 
   useEffect(() => {
     const previo = leerLado();
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (previo) {
-      setGuardado(previo);
-      setConocido(true);
-      setListo(true);
-      return;
-    }
-    if (reduce) {
-      setListo(true);
-      return;
-    }
-    const timer = window.setTimeout(() => setListo(true), TIEMPO_MARCA);
-    return () => window.clearTimeout(timer);
+    if (previo) setGuardado(previo);
   }, []);
 
   function elegir(lado: Lado) {
@@ -54,16 +39,18 @@ export function Apertura({ vitrinas, total }: { vitrinas: Vitrina[]; total: numb
 
   return (
     <section
-      className={`apertura ${listo ? "apertura-lista" : ""} ${elegido ? "apertura-sale" : ""}`}
+      className={`apertura ${elegido ? "apertura-sale" : ""}`}
       aria-labelledby="titulo-apertura"
     >
-      <h1 id="titulo-apertura" className="sr-only">
-        {tienda.nombre}. Elige la vitrina de caballero o de dama.
-      </h1>
-
-      <div className="apertura-marca">
-        <Marca quieta={conocido} className="w-full" />
+      <div className="apertura-marca" aria-hidden="true">
+        <span className="apertura-marca-ubicacion">Dolores Hidalgo · Guanajuato</span>
+        <span className="apertura-logo-marco">
+          <Marca quieta className="apertura-logo apertura-logo-sombra" />
+          <Marca className="apertura-logo" />
+        </span>
+        <span className="apertura-marca-subtitulo">Fragancias inspiradas</span>
       </div>
+      <h1 id="titulo-apertura" className="sr-only">{tienda.nombre}. Elige la vitrina de caballero o de dama.</h1>
 
       <div className="apertura-mitades">
         {vitrinas.map((vitrina) => (
@@ -77,30 +64,36 @@ export function Apertura({ vitrinas, total }: { vitrinas: Vitrina[]; total: numb
             aria-label={`Entrar a la vitrina de ${vitrina.lado.toLowerCase()}, ${vitrina.total} fragancias`}
           >
             <span className="mitad-luz" aria-hidden />
-            <span className="mitad-frascos" aria-hidden>
-              {vitrina.frascos.map((producto, posicion) => (
-                <span key={producto.slug} className={`mitad-frasco mitad-frasco-${posicion}`}>
-                  <Image
-                    src={producto.imagen}
-                    alt=""
-                    width={520}
-                    height={900}
-                    priority={posicion === 0}
-                    className="frasco h-full w-auto object-contain"
-                  />
+            <span className="mitad-marco" aria-hidden="true" />
+            <span className="mitad-escena" aria-hidden="true">
+              {vitrina.fotoMarca ? (
+                <Image src={vitrina.fotoMarca} alt="" width={900} height={1100} priority className="mitad-foto-marca" />
+              ) : (
+                <span className="mitad-frascos">
+                  {vitrina.frascos.map((producto, posicion) => (
+                    <span key={producto.slug} className={`mitad-frasco mitad-frasco-${posicion}`}>
+                      <Image
+                        src={producto.imagen}
+                        alt=""
+                        width={520}
+                        height={900}
+                        priority={posicion === 0}
+                        className="frasco h-full w-auto object-contain"
+                      />
+                    </span>
+                  ))}
+                  <span className="mitad-apoyo" />
                 </span>
-              ))}
-              <span className="mitad-apoyo" />
+              )}
             </span>
             <span className="mitad-texto">
               <span className="etiqueta text-bone-dim">
-                {guardado === vitrina.lado ? "Tu vitrina · " : ""}
-                {vitrina.total} fragancias
+                {guardado === vitrina.lado ? "Tu selección · " : ""}{vitrina.total} fragancias
               </span>
               <span className="titulo mitad-nombre italic">{vitrina.lado}</span>
               <span className="mitad-linea">{vitrina.linea}</span>
-              <span className="mitad-entrar">
-                Entrar
+              <span className="mitad-entrar" aria-hidden="true">
+                Explorar la colección
                 <span aria-hidden className="mitad-flecha">
                   →
                 </span>
@@ -111,11 +104,9 @@ export function Apertura({ vitrinas, total }: { vitrinas: Vitrina[]; total: numb
       </div>
 
       <div className="apertura-pie">
-        <span className="etiqueta">
-          Querétaro 20 · Rivera del Río · {tienda.ciudad.split(",")[0]}
-        </span>
-        <Link href="/productos?categoria=Todas" className="etiqueta text-bone-dim underline-offset-4 hover:text-bone hover:underline">
-          Ver las {total}
+        <span className="apertura-pie-texto">Dos vitrinas, una selección hecha en Dolores Hidalgo</span>
+        <Link href="/productos?categoria=Todas" className="apertura-pie-link">
+          Ver las {total} fragancias <span aria-hidden="true">↗</span>
         </Link>
       </div>
     </section>
