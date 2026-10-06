@@ -1,0 +1,11 @@
+---
+description: Contexto local de Esencias Robjan's y Think Deep para Cursor
+alwaysApply: true
+---
+
+- Este proyecto **ya está en esta PC** en `/home/SalvadorTD/esencias-robjans-recuperado`. No lo clones ni lo descargues de nuevo. Lee `README.md` y `DESIGN.md` antes de proponer cambios.
+- El repo local de Think Deep que corresponde al proyecto Vercel `portafolio` y al dominio `https://www.thinkdeepgroup.com/` está en `/home/SalvadorTD/Desktop/portafolio`. Revisa allí `README.md` y `src/lib/constants.ts` si necesitas entender la filosofía del estudio. Hay otra carpeta antigua llamada `think-deep-ia-agentica`; no la confundas con el repo indicado.
+- El sitio público de Think Deep muestra una versión anterior centrada en Salvador Barba como desarrollador freelance. El checkout local de `Desktop/portafolio` contiene una dirección posterior de Think Deep como estudio digital. Contrasta web y repo antes de inferir qué está en producción o qué se quiere publicar.
+- Principio compartido: una interfaz debe explicar la oferta, funcionar en móvil y llevar a una acción real de contacto, cotización, compra u operación. Los formularios, WhatsApp, pedidos y paneles resuelven trabajo concreto; no son adorno. Aplica este criterio a Robjan's sin copiar la identidad visual de Think Deep.
+- En Robjan's conserva los 304 productos, precios configurables, sucursales, catálogo, panel, MongoDB y pago de prueba. Las fotos actuales de diseñador son referencias de inspiración, no fotos verificadas del empaque Robjan's. Nunca inventes packaging ni publiques secretos de `.env*.local`.
+- Handoff más detallado en `/home/SalvadorTD/CURSOR-HANDOFF-ROBJANS-THINKDEEP.md`.
