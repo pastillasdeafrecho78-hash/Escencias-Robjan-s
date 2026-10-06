@@ -34,7 +34,7 @@ export function ProductCard({ producto }: { producto: Producto }) {
       <div className="mt-3 flex flex-col gap-1 sm:mt-4 sm:flex-row sm:items-start sm:justify-between sm:gap-3">
         <Link href={`/productos/${producto.slug}`} className="min-w-0 rounded-md">
           <h3 className="titulo line-clamp-2 text-[1.35rem] leading-tight sm:truncate sm:text-[1.6rem]">{producto.nombre}</h3>
-          <p className="etiqueta mt-1.5 line-clamp-2 leading-relaxed">{producto.marca ? `Inspirada en ${producto.marca}` : "Esencias Robjan's"}</p>
+          <p className="tarjeta-marca mt-1.5 line-clamp-2">{producto.marca ? `Inspirada en ${producto.marca}` : "Esencias Robjan's"}</p>
         </Link>
         <p className="cifra shrink-0 text-sm text-bone-dim sm:pt-1.5">desde {money(precioDesde(producto))}</p>
       </div>

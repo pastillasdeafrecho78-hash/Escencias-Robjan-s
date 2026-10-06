@@ -34,10 +34,16 @@ typography:
     fontFamily: "Inter Tight"
     fontSize: 14px
     lineHeight: 1.6
+    uso: "navegación, controles, datos y texto funcional"
+  editorial:
+    fontFamily: "Cormorant Garamond"
+    fontWeight: 500
+    uso: "frases secundarias, descripciones de vitrina y texto narrativo"
   etiqueta:
-    fontFamily: "Inter Tight"
-    fontSize: 11px
-    letterSpacing: 0.24em
+    fontFamily: "Cormorant Garamond"
+    fontWeight: 600
+    fontSize: 14px
+    letterSpacing: 0.16em
     textTransform: uppercase
     color: muted
   cifra:
@@ -129,6 +135,6 @@ Una vitrina de perfumería de noche, no una tienda en línea genérica. Se entra
 ## Ajustes de la portada
 
 - En móvil, el logo animado tiene una franja propia encima de las dos vitrinas; ningún texto debe cruzar el logo ni los nombres de categoría.
-- Las frases editoriales de la portada usan Instrument Serif para dar más carácter a los textos secundarios. Las etiquetas, controles y datos mantienen Inter Tight por legibilidad.
+- Cormorant Garamond da carácter a las frases editoriales secundarias y a las etiquetas. Instrument Serif se reserva para los títulos; Inter Tight permanece en controles, navegación y datos por legibilidad.
 - En escritorio, el logo se centra entre las vitrinas. La animación no retrasa la navegación y respeta `prefers-reduced-motion`.
 - Cuando lleguen fotos reales de Robjan's, reemplazar las referencias de la portada por esas fotografías, manteniendo la etiqueta de inspiración en el catálogo y las fichas.

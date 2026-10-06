@@ -52,7 +52,7 @@ export default async function HomePage() {
               <div>
                 <p className="etiqueta">Selección Robjan&apos;s</p>
                 <h2 id="titulo-vitrina" className="titulo mt-4 text-[clamp(2.75rem,6vw,5.5rem)]">El aroma <span className="text-gold italic">que eliges.</span></h2>
-                <p className="mt-4 max-w-md text-sm leading-6 text-bone-dim">Tres inspiraciones para empezar a recorrer nuestras vitrinas.</p>
+                <p className="texto-editorial mt-4 max-w-lg text-bone-dim italic">Tres inspiraciones para empezar a recorrer nuestras vitrinas.</p>
               </div>
               <Link href="/productos?categoria=Todas" className="btn btn-line">Ver el catálogo <span aria-hidden>→</span></Link>
             </div>
@@ -90,7 +90,7 @@ export default async function HomePage() {
               </h2>
             </div>
             <div className="flex flex-col justify-end border-l border-gold/40 pl-6">
-              <p className="text-base leading-7 text-bone-dim">
+              <p className="texto-editorial text-bone-dim">
                 Explora por notas, descubre el perfume que inspira cada fragancia y elige el tamaño que va contigo.
                 También puedes venir a conocerlas en nuestras dos sucursales de Dolores Hidalgo.
               </p>
@@ -129,7 +129,7 @@ export default async function HomePage() {
         </div>
         <div className="mx-auto max-w-6xl px-5 pb-18">
           <p className="etiqueta">Visítanos</p>
-          <p className="mt-3 text-sm text-muted">Dos sucursales en {tienda.ciudad}. {tienda.horario}.</p>
+          <p className="texto-editorial mt-3 text-bone-dim italic">Dos sucursales en {tienda.ciudad}. {tienda.horario}.</p>
           <div className="mt-8 grid gap-0 border-t border-line sm:grid-cols-2">
           {sucursales.map((sucursal) => (
             <a

@@ -75,7 +75,7 @@ export function Catalogo({ productos, ajustes, filtros }: { productos: Producto[
           <h1 className="titulo mt-2 text-[clamp(3.25rem,9vw,7.5rem)] sm:mt-4">
             {categoria === "Todas" ? "Catálogo" : categoria}
           </h1>
-          <p className="titulo mt-2 text-xl text-bone-dim italic sm:mt-3 sm:text-2xl">{subtitulo[categoria] ?? subtitulo.Todas}</p>
+          <p className="texto-editorial mt-2 text-bone-dim italic sm:mt-3">{subtitulo[categoria] ?? subtitulo.Todas}</p>
           <p className="cifra mt-6 hidden max-w-xl text-sm text-muted sm:block">
             Chico 30 ml {money(Math.round(mostrador * ajustes.factores[30]))} · Mediano 50 ml {money(mostrador)} · Grande
             100 ml {money(Math.round(mostrador * ajustes.factores[100]))}

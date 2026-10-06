@@ -55,7 +55,7 @@ export function ProductoDetalle({ producto, otros }: { producto: Producto; otros
             </Link>
           </nav>
           <h1 className="titulo mt-6 text-[clamp(3rem,6.5vw,5.5rem)]">{producto.nombre}</h1>
-          <p className="titulo mt-3 text-2xl text-bone-dim italic">
+          <p className="texto-editorial mt-3 text-bone-dim italic">
             {producto.marca ? `inspirada en ${producto.marca}` : "de Esencias Robjan's"}
           </p>
           <p className="etiqueta mt-6 text-bone-dim">{producto.familia}</p>

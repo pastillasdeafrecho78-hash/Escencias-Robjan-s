@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Instrument_Serif, Inter_Tight } from "next/font/google";
+import { Cormorant_Garamond, Instrument_Serif, Inter_Tight } from "next/font/google";
 import { CartDrawer } from "@/components/CartDrawer";
 import { CartProvider } from "@/components/CartProvider";
 import { Footer } from "@/components/Footer";
@@ -14,6 +14,12 @@ const serif = Instrument_Serif({
   variable: "--font-instrument-serif",
 });
 const sans = Inter_Tight({ subsets: ["latin"], variable: "--font-inter-tight" });
+const editorial = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["500", "600"],
+  style: ["normal", "italic"],
+  variable: "--font-cormorant-garamond",
+});
 
 export const metadata: Metadata = {
   title: {
@@ -31,7 +37,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="es" className={`${serif.variable} ${sans.variable}`}>
+    <html lang="es" className={`${serif.variable} ${sans.variable} ${editorial.variable}`}>
       <body className="flex min-h-screen flex-col antialiased">
         <a
           href="#contenido"
