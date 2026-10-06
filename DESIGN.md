@@ -136,5 +136,6 @@ Una vitrina de perfumería de noche, no una tienda en línea genérica. Se entra
 
 - En móvil, el logo animado tiene una franja propia encima de las dos vitrinas; ningún texto debe cruzar el logo ni los nombres de categoría.
 - Cormorant Garamond da carácter a las frases editoriales secundarias y a las etiquetas. Instrument Serif se reserva para los títulos; Inter Tight permanece en controles, navegación y datos por legibilidad.
+- Los archivos latinos de Cormorant Garamond se alojan en `src/fonts/` con su licencia OFL para que el despliegue no dependa de descargar esa fuente durante la compilación.
 - En escritorio, el logo se centra entre las vitrinas. La animación no retrasa la navegación y respeta `prefers-reduced-motion`.
 - Cuando lleguen fotos reales de Robjan's, reemplazar las referencias de la portada por esas fotografías, manteniendo la etiqueta de inspiración en el catálogo y las fichas.

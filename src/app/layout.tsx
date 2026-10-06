@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Instrument_Serif, Inter_Tight } from "next/font/google";
+import { Instrument_Serif, Inter_Tight } from "next/font/google";
+import localFont from "next/font/local";
 import { CartDrawer } from "@/components/CartDrawer";
 import { CartProvider } from "@/components/CartProvider";
 import { Footer } from "@/components/Footer";
@@ -14,11 +15,13 @@ const serif = Instrument_Serif({
   variable: "--font-instrument-serif",
 });
 const sans = Inter_Tight({ subsets: ["latin"], variable: "--font-inter-tight" });
-const editorial = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["500", "600"],
-  style: ["normal", "italic"],
+const editorial = localFont({
+  src: [
+    { path: "../fonts/cormorant-garamond-latin.woff2", weight: "500 600", style: "normal" },
+    { path: "../fonts/cormorant-garamond-latin-italic.woff2", weight: "500 600", style: "italic" },
+  ],
   variable: "--font-cormorant-garamond",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
