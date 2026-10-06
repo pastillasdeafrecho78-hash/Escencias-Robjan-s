@@ -5,6 +5,7 @@ scripts/
 .env
 .env*.local
 .next/
+.next-dev/
 node_modules/
 *.tsbuildinfo
 __pycache__/
