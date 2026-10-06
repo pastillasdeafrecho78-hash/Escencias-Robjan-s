@@ -24,5 +24,5 @@ export async function baseDeDatos(): Promise<Db> {
     });
   }
   const cliente = await global.__mongoEsencias;
-  return cliente.db(process.env.MONGODB_DB || "FrateliFinal");
+  return cliente.db(process.env.MONGODB_DB || "EsenciasRobjans");
 }

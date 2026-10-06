@@ -14,7 +14,7 @@ Tienda de fragancias inspiradas en Dolores Hidalgo, Guanajuato. El sitio parte d
 - Armar un carrito que se guarda en el navegador.
 - Pagar en modo prueba con la tarjeta `4242 4242 4242 4242`. No hay cargo real. La tarjeta `4000 0000 0000 0002` se rechaza para probar el error.
 
-El catálogo sale del PDF de Whatsie (`scripts/extraer-catalogo.py`) y queda en `src/data/catalogo.json`. Cada foto se extrae a su tamaño nativo, se le quita el fondo con rembg y se guarda en WebP dentro de `public/catalogo`. La marca se vectoriza desde la placa con `scripts/trazar-marca.py`.
+El catálogo original ya está incluido en `src/data/catalogo.json`, con sus fotos WebP en `public/catalogo`. El PDF y los scripts históricos de extracción y trazado de marca no estaban en la copia recuperada; no hacen falta para administrar el catálogo actual. Las fotos nuevas se procesan con `scripts/recortar-foto.py`.
 
 ## Cómo correrlo
 
@@ -38,13 +38,13 @@ Abre [http://localhost:3457](http://localhost:3457). Sin `MONGODB_URI` la tienda
 
    En `panel/.env.local` pon una `PANEL_PASSWORD` de al menos 10 caracteres y un `PANEL_SECRET` (`openssl rand -hex 32`). Esos archivos no se suben al repositorio.
 
-2. Enciende MongoDB. Para probar sin instalar nada:
+2. Usa el MongoDB que ya escucha en `127.0.0.1:27017` o inicia uno local si ese puerto está libre:
 
    ```bash
    npm run mongo:local
    ```
 
-   Levanta un Mongo en `127.0.0.1:27017` que guarda los datos en `.mongo-local/`. En producción, apunta `MONGODB_URI` a tu base.
+   El comando levanta Mongo en `127.0.0.1:27017` y guarda los datos en `.mongo-local/`. Si ya hay otro Mongo en ese puerto, el comando se detiene y puedes usar el que está corriendo. La base predeterminada `EsenciasRobjans` mantiene estos productos separados.
 
 3. Copia el catálogo a la base:
 
@@ -52,7 +52,7 @@ Abre [http://localhost:3457](http://localhost:3457). Sin `MONGODB_URI` la tienda
    npm run sembrar
    ```
 
-   Agrega las 304 esencias por slug sin pisar lo que ya editaste. `npm run sembrar -- --pisar` las vuelve a dejar como en el PDF. Si la colección tiene documentos de otro proyecto, se detiene: usa otra base con `MONGODB_DB` o `MONGODB_COLECCION`.
+   Agrega las 304 esencias por slug sin pisar lo que ya editaste. `npm run sembrar -- --pisar` repone los datos del JSON. Si la colección tiene documentos de otro proyecto, se detiene: usa otra base con `MONGODB_DB` o `MONGODB_COLECCION`.
 
 4. Corre la tienda y el panel, cada uno en su terminal:
 
@@ -64,6 +64,8 @@ Abre [http://localhost:3457](http://localhost:3457). Sin `MONGODB_URI` la tienda
 
    El panel queda en [http://127.0.0.1:3458](http://127.0.0.1:3458) y solo escucha en tu máquina.
 
+   Para subir fotos, instala Pillow en Python (`python -m pip install pillow`). `rembg` es opcional (`python -m pip install rembg`): con él se quitan fondos de cualquier color; sin él, el procesador quita fondos blancos conectados al borde. El panel acepta JPG, PNG y WebP de hasta 8 MB.
+
 ### Qué guarda la base
 
 | Colección | Contenido |
@@ -72,7 +74,7 @@ Abre [http://localhost:3457](http://localhost:3457). Sin `MONGODB_URI` la tienda
 | `ajustes_tienda` | El precio de mostrador y los porcentajes de 30, 50 y 100 ml. |
 | `fotos_esencias` | Las fotos que se suben desde el panel, ya recortadas. La tienda las sirve en `/fotos/<slug>.webp`. |
 
-La base por omisión es `FrateliFinal`. Si ese nombre ya lo usa otro proyecto, cambia `MONGODB_DB` en los dos `.env.local`.
+La base por omisión es `EsenciasRobjans`, separada de otros proyectos. Usa el mismo `MONGODB_DB` en la tienda y el panel.
 
 ### Seguridad del panel
 
@@ -80,7 +82,7 @@ La base por omisión es `FrateliFinal`. Si ese nombre ya lo usa otro proyecto, c
 - La sesión es una cookie httpOnly y `SameSite=Strict`, firmada con HMAC y válida 12 horas.
 - Se permiten 5 intentos fallidos cada 15 minutos.
 - Cada acción vuelve a revisar la sesión aunque el middleware ya la haya revisado.
-- Las fotos se validan por contenido (JPG, PNG o WebP, hasta 8 MB) y se recortan con `scripts/recortar-foto.py`, que usa rembg si está instalado (`pip install rembg pillow`).
+- Las fotos se validan por contenido (JPG, PNG o WebP, hasta 8 MB) y se procesan con `scripts/recortar-foto.py`.
 
 ## Publicar en Vercel
 
