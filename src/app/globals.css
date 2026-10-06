@@ -1,0 +1,783 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-inter-tight), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-instrument-serif), "Times New Roman", serif;
+}
+
+@theme {
+  --color-ink: #08080a;
+  --color-bone: #f2ede3;
+  --color-bone-dim: #cfc8ba;
+  --color-muted: #8f897e;
+  --color-line: #26262a;
+  --color-gold: #d2ad68;
+  --color-field: #111113;
+  --color-alert: #e07a68;
+  --color-noche: #0b1219;
+  --color-vino: #160c11;
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@layer base {
+  :focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 3px;
+  }
+
+  a,
+  button,
+  input,
+  select,
+  textarea,
+  label,
+  summary {
+    touch-action: manipulation;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  option {
+    background: var(--color-ink);
+    color: var(--color-bone);
+  }
+}
+
+body {
+  background: var(--color-ink);
+  color: var(--color-bone);
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01", "cv11";
+  -webkit-font-smoothing: antialiased;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+}
+
+::selection {
+  background: var(--color-bone);
+  color: var(--color-ink);
+}
+
+@layer components {
+  .titulo {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    line-height: 0.95;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+
+  .etiqueta {
+    font-size: 0.6875rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+
+  .cifra {
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
+  }
+
+  .field {
+    width: 100%;
+    border: 0;
+    border-bottom: 1px solid var(--color-line);
+    background: transparent;
+    padding: 0.65rem 0;
+    color: var(--color-bone);
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+
+  .field::placeholder {
+    color: var(--color-muted);
+  }
+
+  .field:focus {
+    border-bottom-color: var(--color-gold);
+  }
+
+  /* El campo es una sola línea: el foco la engrosa en dorado en lugar de dibujar una caja. */
+  .field:focus-visible {
+    outline: none;
+    box-shadow: 0 1px 0 0 var(--color-gold);
+  }
+
+  .field[aria-invalid="true"] {
+    border-bottom-color: var(--color-alert);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    border-radius: 999px;
+    background: var(--color-bone);
+    color: var(--color-ink);
+    padding: 0.85rem 1.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+
+  .btn:hover {
+    background: #fff;
+  }
+
+  .btn:active {
+    transform: scale(0.98);
+  }
+
+  .btn:disabled {
+    opacity: 0.4;
+  }
+
+  .btn-line {
+    background: transparent;
+    color: var(--color-bone);
+    box-shadow: inset 0 0 0 1px var(--color-line);
+  }
+
+  .btn-line:hover {
+    background: transparent;
+    box-shadow: inset 0 0 0 1px var(--color-bone);
+  }
+
+  .mapa {
+    filter: grayscale(1) invert(0.92) contrast(0.85);
+  }
+
+  /* Campos detrás del frasco. La luz lateral es lo que diferencia un lado del otro. */
+  .fondo-neutro {
+    background:
+      radial-gradient(60% 55% at 50% 58%, rgba(210, 173, 104, 0.1), transparent 70%),
+      #111113;
+  }
+
+  .fondo-caballero {
+    background:
+      radial-gradient(55% 50% at 50% 58%, rgba(120, 166, 204, 0.2), transparent 70%),
+      radial-gradient(90% 80% at 0% 30%, rgba(90, 130, 170, 0.18), transparent 60%),
+      var(--color-noche);
+  }
+
+  .fondo-dama {
+    background:
+      radial-gradient(55% 50% at 50% 58%, rgba(214, 120, 128, 0.2), transparent 70%),
+      radial-gradient(90% 80% at 100% 30%, rgba(170, 70, 90, 0.2), transparent 60%),
+      var(--color-vino);
+  }
+
+  /* Las dos luces viven en capas y solo cambia su opacidad: el fondo no se repinta al cambiar de lado. */
+  .cabecera-catalogo {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .cabecera-catalogo::before,
+  .cabecera-catalogo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    pointer-events: none;
+  }
+
+  .cabecera-catalogo::before {
+    background:
+      radial-gradient(70% 90% at 0% 0%, rgba(90, 130, 170, 0.22), transparent 60%),
+      var(--color-noche);
+  }
+
+  .cabecera-catalogo::after {
+    background:
+      radial-gradient(70% 90% at 100% 0%, rgba(170, 70, 90, 0.24), transparent 60%),
+      var(--color-vino);
+  }
+
+  .lado-caballero::before,
+  .lado-dama::after {
+    opacity: 1;
+  }
+
+  /* 304 tarjetas: el navegador no pinta las que están lejos. El margen negativo deja lugar al anillo de foco. */
+  .tarjeta {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 30rem;
+    margin: -0.375rem;
+    padding: 0.375rem;
+  }
+
+  .vitrina-destacados {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  .vitrina-destacado {
+    position: relative;
+    display: flex;
+    min-height: 19rem;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    border: 1px solid var(--color-line);
+    border-radius: 1.25rem;
+    padding: 1.25rem;
+  }
+
+  .vitrina-principal {
+    grid-column: 1 / -1;
+    min-height: 27rem;
+  }
+
+  .vitrina-foto {
+    position: absolute;
+    inset: 3rem 12% 4.5rem;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .grupo-vitrina:hover .vitrina-foto,
+  .grupo-vitrina:focus-visible .vitrina-foto {
+    transform: translateY(-0.6rem);
+  }
+
+  .vitrina-destacado::after {
+    content: "";
+    position: absolute;
+    inset: 48% 0 0;
+    background: linear-gradient(transparent, rgba(5, 5, 7, 0.82));
+    pointer-events: none;
+  }
+
+  .repisa-tamanos {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: end;
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .tamano-vitrina {
+    display: flex;
+    height: 19rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: end;
+    border-right: 1px solid var(--color-line);
+    padding: 0 0.4rem 1.25rem;
+    text-align: center;
+  }
+
+  .tamano-vitrina:last-child { border-right: 0; }
+
+  .tamano-vitrina-foto {
+    width: min(80%, 11rem);
+    min-height: 5rem;
+    margin-bottom: 0.8rem;
+  }
+
+  @media (min-width: 640px) {
+    .vitrina-destacados {
+      grid-template-columns: 1.25fr 0.8fr;
+      grid-template-rows: repeat(2, 17rem);
+      gap: 1rem;
+    }
+
+    .vitrina-principal {
+      grid-column: 1;
+      grid-row: 1 / 3;
+      min-height: 0;
+    }
+
+    .vitrina-destacado { min-height: 0; padding: 1.5rem; }
+    .vitrina-foto { inset: 1.75rem 22% 3.5rem; }
+    .vitrina-principal .vitrina-foto { inset: 2rem 19% 4rem; }
+    .tamano-vitrina { height: 25rem; }
+  }
+
+  /* El frasco recortado se apoya en una sombra elíptica para no flotar. */
+  .frasco {
+    position: relative;
+    filter: drop-shadow(0 18px 22px rgba(0, 0, 0, 0.45));
+  }
+
+  .apoyo::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0.6rem;
+    width: 58%;
+    height: 1.1rem;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(0, 0, 0, 0.6), transparent);
+    pointer-events: none;
+  }
+
+  /* Marca: el perfume sube dentro de la R, el nombre se descubre y cierra un brillo. */
+  .marca-viva .contorno {
+    stroke-dasharray: 1;
+    animation:
+      dibuja 1.3s cubic-bezier(0.65, 0, 0.35, 1) 0.1s both,
+      apaga 0.6s ease 3.1s forwards;
+  }
+
+  .marca-quieta .contorno {
+    opacity: 0;
+  }
+
+  .nivel {
+    transform: translateY(96px);
+  }
+
+  .marca-viva .nivel {
+    animation: llena 2.7s cubic-bezier(0.45, 0.05, 0.25, 1) 0.55s both;
+  }
+
+  .marca-viva .ola {
+    animation: ola 1.15s linear 0.55s 3;
+  }
+
+  /* La orilla del rectángulo se desvanece: el nombre aparece como niebla, sin un corte vertical. */
+  .marca-viva .revela-esencias {
+    animation: revela 1.6s cubic-bezier(0.4, 0, 0.3, 1) 2.6s both;
+  }
+
+  .marca-viva .revela-robjans {
+    animation: revela 1.5s cubic-bezier(0.4, 0, 0.3, 1) 2.9s both;
+  }
+
+  .brillo-marca {
+    opacity: 0;
+  }
+
+  .marca-viva .brillo-marca {
+    animation: barre 1.4s ease-in-out 3.7s both;
+  }
+
+  @keyframes dibuja {
+    from { stroke-dashoffset: 1; opacity: 0.2; }
+    to { stroke-dashoffset: 0; opacity: 1; }
+  }
+
+  @keyframes apaga {
+    to { opacity: 0; }
+  }
+
+  @keyframes llena {
+    from { transform: translateY(640px); }
+    to { transform: translateY(96px); }
+  }
+
+  @keyframes ola {
+    from { transform: translateX(0); }
+    to { transform: translateX(-256px); }
+  }
+
+  @keyframes revela {
+    from { transform: translateX(-1470px); }
+    to { transform: translateX(0); }
+  }
+
+  @keyframes barre {
+    0% { opacity: 1; transform: translateX(0); }
+    100% { opacity: 1; transform: translateX(1900px); }
+  }
+
+  /* Apertura: la marca se llena sobre la costura de dos vitrinas, una fría y una cálida. */
+  .apertura {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: calc(100svh - 3.5rem);
+    min-height: 660px;
+    overflow: hidden;
+    background: var(--color-ink);
+  }
+
+  .apertura-marca {
+    position: relative;
+    z-index: 3;
+    width: min(62vw, 300px);
+    margin: 1.75rem auto 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease, transform 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+
+  .apertura-marca::before {
+    content: "";
+    position: absolute;
+    inset: -30% -40%;
+    z-index: -1;
+    background: radial-gradient(closest-side, rgba(210, 173, 104, 0.16), transparent 75%);
+  }
+
+  .apertura-mitades {
+    position: relative;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    margin-top: 1rem;
+  }
+
+  .mitad {
+    position: relative;
+    display: flex;
+    flex: 1 1 0;
+    min-height: 0;
+    overflow: hidden;
+    text-align: left;
+    color: var(--color-bone);
+    opacity: 0;
+    cursor: pointer;
+    transition:
+      flex-grow 0.8s cubic-bezier(0.65, 0, 0.35, 1),
+      opacity 0.9s ease;
+  }
+
+  .mitad-caballero {
+    background:
+      radial-gradient(70% 80% at 70% 60%, rgba(120, 166, 204, 0.24), transparent 70%),
+      linear-gradient(180deg, #0b1219, #0e1822);
+  }
+
+  .mitad-dama {
+    background:
+      radial-gradient(70% 80% at 30% 60%, rgba(214, 120, 128, 0.26), transparent 70%),
+      linear-gradient(180deg, #160c11, #1d0f16);
+  }
+
+  .mitad-luz {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+
+  .mitad-caballero .mitad-luz {
+    background: radial-gradient(45% 55% at 70% 65%, rgba(160, 200, 235, 0.2), transparent 70%);
+  }
+
+  .mitad-dama .mitad-luz {
+    background: radial-gradient(45% 55% at 30% 65%, rgba(240, 150, 160, 0.2), transparent 70%);
+  }
+
+  .mitad-frascos {
+    position: absolute;
+    right: 3%;
+    bottom: 12%;
+    display: flex;
+    height: 62%;
+    align-items: flex-end;
+    transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .mitad-dama .mitad-frascos {
+    right: auto;
+    left: 2%;
+    height: 56%;
+  }
+
+  .mitad-frasco {
+    position: relative;
+    z-index: 1;
+    display: block;
+    height: 100%;
+    opacity: 0;
+    transform: translateY(40px);
+    transition:
+      opacity 0.9s ease,
+      transform 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .mitad-frasco-1,
+  .mitad-frasco-2 {
+    z-index: 0;
+    height: 62%;
+    margin: 0 -0.75rem;
+    filter: brightness(0.62) saturate(0.85);
+  }
+
+  .mitad-frasco-0 {
+    order: 1;
+  }
+
+  .mitad-frasco-1 {
+    order: 0;
+  }
+
+  .mitad-frasco-2 {
+    order: 2;
+  }
+
+  .mitad-apoyo {
+    position: absolute;
+    left: 8%;
+    right: 8%;
+    bottom: -0.6rem;
+    height: 1.4rem;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(0, 0, 0, 0.7), transparent);
+  }
+
+  .mitad-texto {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    width: 58%;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 0.35rem;
+    padding: 1.25rem 0 1.5rem 1.25rem;
+  }
+
+  .mitad-dama .mitad-texto {
+    margin-left: auto;
+    padding: 1.25rem 1.25rem 1.5rem 0;
+    align-items: flex-end;
+    text-align: right;
+  }
+
+  .mitad-nombre {
+    font-size: clamp(3rem, 7vw, 6.5rem);
+    line-height: 0.9;
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .mitad-linea {
+    max-width: 17rem;
+    font-size: 0.875rem;
+    line-height: 1.45;
+    color: var(--color-bone-dim);
+  }
+
+  .mitad-entrar {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+    font-size: 0.8125rem;
+    letter-spacing: 0.06em;
+  }
+
+  .mitad-flecha {
+    display: inline-block;
+    transition: transform 0.4s ease;
+  }
+
+  .apertura-pie {
+    position: absolute;
+    z-index: 3;
+    inset: auto 0 0.9rem;
+    display: none;
+    justify-content: center;
+    gap: 1.5rem;
+    opacity: 0;
+    transition: opacity 0.8s ease 0.6s;
+  }
+
+  .apertura-lista .mitad {
+    opacity: 1;
+  }
+
+  .apertura-lista .mitad-frasco {
+    opacity: 1;
+    transform: none;
+  }
+
+  .apertura-lista .mitad-frasco-1 {
+    transition-delay: 0.12s;
+  }
+
+  .apertura-lista .mitad-frasco-2 {
+    transition-delay: 0.22s;
+  }
+
+  .apertura-lista .mitad-dama .mitad-frasco {
+    transition-delay: 0.15s;
+  }
+
+  .apertura-lista .apertura-pie {
+    opacity: 1;
+  }
+
+  .mitad:focus-visible {
+    outline: 1px solid var(--color-bone);
+    outline-offset: -6px;
+  }
+
+  .apertura-lista .mitad:hover {
+    flex-grow: 1.55;
+  }
+
+  .mitad:hover .mitad-luz {
+    opacity: 1;
+  }
+
+  .mitad:hover .mitad-frascos {
+    transform: translateY(-14px) scale(1.04);
+  }
+
+  .mitad:hover .mitad-flecha {
+    transform: translateX(6px);
+  }
+
+  .apertura-sale .apertura-marca {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.96);
+  }
+
+  .apertura-sale .apertura-pie {
+    opacity: 0;
+    transition-delay: 0s;
+  }
+
+  .mitad.mitad-elegida {
+    flex-grow: 14;
+  }
+
+  .mitad.mitad-elegida .mitad-luz {
+    opacity: 1;
+  }
+
+  .mitad.mitad-elegida .mitad-frascos {
+    transform: translateY(-20px) scale(1.06);
+  }
+
+  .mitad.mitad-cede {
+    flex-grow: 0.0001;
+    opacity: 0;
+  }
+
+  @media (min-width: 640px) {
+    .apertura-marca {
+      position: absolute;
+      top: 5%;
+      left: 50%;
+      width: min(23vw, 290px);
+      margin: 0;
+      transform: translateX(-50%);
+    }
+
+    .apertura-sale .apertura-marca {
+      transform: translateX(-50%) translateY(-20px) scale(0.96);
+    }
+
+    .apertura-mitades {
+      flex-direction: row;
+      margin-top: 0;
+    }
+
+    .mitad-frascos {
+      right: auto;
+      left: 50%;
+      bottom: 33%;
+      height: 44%;
+      transform: translateX(-50%);
+    }
+
+    .mitad-dama .mitad-frascos {
+      left: 50%;
+      height: 44%;
+    }
+
+    .mitad:hover .mitad-frascos {
+      transform: translateX(-50%) translateY(-16px) scale(1.04);
+    }
+
+    .mitad.mitad-elegida .mitad-frascos {
+      transform: translateX(-50%) translateY(-20px) scale(1.06);
+    }
+
+    .mitad-texto,
+    .mitad-dama .mitad-texto {
+      width: 100%;
+      padding: 2.25rem 2.5rem 3.25rem;
+    }
+
+    .apertura-pie {
+      display: flex;
+    }
+  }
+
+  .barra-nota {
+    transition: width 1.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  @keyframes entra {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  .entra {
+    animation: entra 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  @keyframes sube-hoja {
+    from { transform: translateY(100%); }
+    to { transform: none; }
+  }
+
+  @keyframes aparece-panel {
+    from { opacity: 0; transform: translateY(8px) scale(0.98); }
+    to { opacity: 1; transform: none; }
+  }
+
+  @keyframes aparece {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .tamanos-panel {
+    animation: sube-hoja 0.38s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .tamanos-velo {
+    animation: aparece 0.25s ease both;
+  }
+
+  @media (min-width: 640px) {
+    .tamanos-panel {
+      animation: aparece-panel 0.24s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .marca-viva .contorno {
+    opacity: 0;
+  }
+}

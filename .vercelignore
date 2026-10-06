@@ -1,0 +1,11 @@
+# El panel del dueño corre solo en su máquina; no se publica con la tienda.
+panel/
+.mongo-local/
+scripts/
+.env
+.env*.local
+.next/
+node_modules/
+*.tsbuildinfo
+__pycache__/
+.cursor/
