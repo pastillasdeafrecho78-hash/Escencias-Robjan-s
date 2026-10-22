@@ -30,6 +30,5 @@ export function mensajePedido(pedido: Pedido) {
     .join("\n");
   const entrega = textoEntrega(pedido.entrega);
   const nota = pedido.nota.trim() ? `\nNota: ${pedido.nota.trim()}` : "";
-  const pago = pedido.pago === "prueba" ? "\nPago: prueba aceptada, sin cargo real." : "";
-  return `Hola, soy ${pedido.nombre}. Quiero confirmar el pedido ${pedido.folio}.\n${lineas}\nTotal: ${money(pedido.total)}\nEntrega: ${entrega}\nTeléfono: ${pedido.telefono}${nota}${pago}`;
+  return `Hola, soy ${pedido.nombre}. Quiero confirmar el pedido ${pedido.folio}.\n${lineas}\nTotal estimado: ${money(pedido.total)}\nEntrega: ${entrega}\nTeléfono: ${pedido.telefono}${nota}\nPago pendiente de acordar con la tienda.`;
 }

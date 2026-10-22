@@ -31,6 +31,7 @@ export const metadata: Metadata = {
   },
   description:
     "Perfumería en Dolores Hidalgo. Fragancias inspiradas en 30, 50 y 100 ml. Recógelas en Querétaro 20 o en Rivera del Río, o apártalas por WhatsApp.",
+  metadataBase: new URL("https://esencias-robjans.vercel.app"),
 };
 
 export const viewport: Viewport = {

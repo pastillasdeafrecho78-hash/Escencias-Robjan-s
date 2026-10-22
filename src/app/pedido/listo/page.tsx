@@ -45,19 +45,12 @@ export default function PedidoListoPage() {
   return (
     <div className="page-stage mx-auto max-w-2xl px-5 py-14">
       <p className="etiqueta">
-        {pedido.pago === "prueba" ? "Pago de prueba aceptado" : "Pedido apartado"}
+        Solicitud lista
       </p>
       <h1 className="titulo cifra mt-2 text-6xl sm:text-7xl">{pedido.folio}</h1>
       <p className="mt-4 text-sm leading-6 text-muted">
-        {pedido.pago === "prueba"
-          ? `${pedido.nombre}, la simulación terminó sin cargo real. Mándale el folio a la tienda para coordinar ${pedido.entrega === "envio" ? "el envío." : `tu pedido: ${textoEntrega(pedido.entrega).toLowerCase()}.`}`
-          : `${pedido.nombre}, este pedido todavía no tiene pago de prueba.`}
+        {`${pedido.nombre}, envía este folio por WhatsApp. La tienda confirmará disponibilidad, total y ${pedido.entrega === "envio" ? "el envío." : `la entrega: ${textoEntrega(pedido.entrega).toLowerCase()}.`}`}
       </p>
-      {pedido.pago !== "prueba" && (
-        <Link href="/pedido/pago" className="mt-4 inline-block text-sm underline underline-offset-4">
-          Ir al pago de prueba
-        </Link>
-      )}
       <ul className="mt-8 space-y-2 border border-line p-5 text-sm">
         {pedido.items.map((item) => (
           <li key={`${item.slug}-${item.ml}`} className="flex justify-between gap-3">

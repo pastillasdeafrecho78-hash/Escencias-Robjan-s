@@ -43,6 +43,9 @@ export function Footer() {
           <Link className="hover:text-bone" href="/contacto">
             Cómo llegar
           </Link>
+          <Link className="hover:text-bone" href="/aviso-de-privacidad">Privacidad</Link>
+          <Link className="hover:text-bone" href="/terminos">Términos</Link>
+          <Link className="hover:text-bone" href="/aviso-legal">Aviso legal</Link>
           <a className="hover:text-bone" href={enlaceWhatsapp("Hola, quiero conocer las esencias.")} target="_blank" rel="noreferrer">
             WhatsApp
           </a>

@@ -85,7 +85,7 @@ export default function PedidoPage() {
       }
       sessionStorage.setItem(STORAGE, JSON.stringify(data));
       setSaliendo(true);
-      router.push("/pedido/pago");
+      router.push("/pedido/listo");
     } catch {
       setError("No hubo respuesta de la tienda. Revisa tu conexión e inténtalo de nuevo.");
     } finally {
@@ -127,8 +127,8 @@ export default function PedidoPage() {
         <p className="etiqueta">Tu selección · Datos de entrega</p>
         <h1 className="titulo text-6xl sm:text-7xl">Apartar pedido</h1>
         <p className="mt-3 max-w-md text-sm leading-6 text-muted">
-          Deja tus datos y después simula un pago con la tarjeta de prueba indicada. No se hará ningún cargo real.
-          Para coordinar tu compra, envía el folio a la tienda por WhatsApp.
+          Deja tus datos para preparar tu solicitud. Este sitio no cobra en línea ni pide datos de tarjeta.
+          Envía el folio a la tienda por WhatsApp para confirmar disponibilidad, total y entrega.
         </p>
         <form onSubmit={enviar} className="mt-8 space-y-6" noValidate>
           <div>
@@ -240,7 +240,7 @@ export default function PedidoPage() {
             </p>
           )}
           <button type="submit" disabled={enviando} className="btn disabled:opacity-60">
-            {enviando ? "Armando pedido…" : "Continuar al pago de prueba"}
+            {enviando ? "Armando pedido…" : "Preparar solicitud"}
           </button>
         </form>
       </div>
